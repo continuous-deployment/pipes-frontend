@@ -4,7 +4,9 @@
   "description": "",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build"
+    "dev": "webpack-dev-server --devtool eval --progress --colors --hot --content-base build",
+    "deploy": "NODE_ENV=production webpack -p --config webpack.production.config.js",
+    "lint": "semistandard --verbose | snazzy"
   },
   "repository": {
     "type": "git",
@@ -20,6 +22,8 @@
     "less": "^2.5.3",
     "less-loader": "^2.2.2",
     "node-static": "^0.7.7",
+    "semistandard": "^7.0.5",
+    "snazzy": "^2.0.1",
     "style-loader": "^0.13.0"
   },
   "dependencies": {
