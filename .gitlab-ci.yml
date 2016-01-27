@@ -1,0 +1,11 @@
+stages:
+  - lint
+  - test
+ 
+ lint_semistandard:
+  stage: lint
+  image: registry.noprobe.co.uk/coding-standards
+  script:
+    - semistandard --verbose | snazzy
+  tags:
+    - docker
