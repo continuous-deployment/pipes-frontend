@@ -1,8 +1,8 @@
 stages:
   - lint
   - test
- 
- lint_semistandard:
+
+lint_semistandard:
   stage: lint
   image: registry.noprobe.co.uk/coding-standards
   script:
