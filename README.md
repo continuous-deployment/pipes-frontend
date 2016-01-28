@@ -8,7 +8,7 @@ npm install
 
 Run this to build the app. Changing js, jsx or less will trigger the live reload.
 ```
-npm run dev
+npm start
 ```
 
 Uses webpack to live reload changes that are made.
