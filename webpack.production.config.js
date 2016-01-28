@@ -4,7 +4,7 @@ var node_modules_dir = path.resolve(__dirname, 'node_modules');
 
 var config = {
   entry: {
-    app: path.resolve(__dirname, 'app/main.js'),
+    app: path.resolve(__dirname, 'app/index.js'),
     vendors: ['react']
   },
   output: {
