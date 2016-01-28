@@ -1,6 +1,9 @@
 import React from 'react';
 
 let Project = React.createClass({
+  propTypes: {
+    params: React.PropTypes.object
+  },
   render () {
     return (
       <div>

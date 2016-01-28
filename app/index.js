@@ -15,7 +15,6 @@ const App = React.createClass({
           <li><Link to='/projects'>Projects</Link></li>
           <li><Link to='/projects/project/1'>View project</Link></li>
         </ul>
-        {this.props.children}
       </div>
     );
   }
