@@ -11,9 +11,8 @@ render((
   <Router>
     <Route path='/' component={App}>
       <IndexRoute component={Dashboard} />
-      <Route path='projects' component={Projects}>
-        <Route path=':id' component={Project} />
-      </Route>
+      <Route path='projects' component={Projects}/>
+      <Route path='projects/:id' component={Project} />
     </Route>
   </Router>
 ), document.getElementById('root'));
