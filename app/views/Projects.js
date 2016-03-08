@@ -2,7 +2,7 @@ import React from 'react';
 
 let Projects = React.createClass({
   propTypes: {
-    items: React.propType.array
+    items: React.PropTypes.array
   },
   render () {
     return (
