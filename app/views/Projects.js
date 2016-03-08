@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 
-let Projects = React.createClass({
-  propTypes: {
-    items: React.PropTypes.array
-  },
+class Projects extends Component
+{
+  static propTypes = {
+    items: PropTypes.array
+  }
+
   render () {
     return (
       <div>
@@ -12,6 +14,6 @@ let Projects = React.createClass({
       </div>
     );
   }
-});
+}
 
 export default Projects;
