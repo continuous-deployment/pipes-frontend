@@ -17,9 +17,7 @@ class HostForm extends Component
   componentDidMount () {
     this.setState({
       host: this.props.host,
-      group: this.props.group,
-      url: this.props.url,
-      project_id: this.props.project_id
+      port: this.props.port
     });
   }
 
