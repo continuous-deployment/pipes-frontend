@@ -10,9 +10,7 @@ class HostForm extends Component
 
   state = {
     host: '',
-    group: '',
-    project_id: '',
-    url: '',
+    port: '',
     alert: null
   }
 
