@@ -36,6 +36,12 @@ class Projects extends Component
 
     return (
       <div>
+        <Link
+          to={'/projects/store'}
+          className='btn btn-lg btn-success'
+        >
+          <i className='glyphicon glyphicon-plus'></i> New Project
+        </Link>
         <h2>Projects</h2>
         <div class="list-group">
           {projects}
