@@ -32,7 +32,17 @@ class Project extends Component
         <Link to='/projects' className='btn btn-lg btn-danger'>
           <i className='glyphicon glyphicon-chevron-left'></i> Back to Projects
         </Link>
+
+        <Link
+          to={'/projects/' + this.state.project.id + '/update'}
+          className='btn btn-lg btn-success pull-right'
+        >
+          <i className='glyphicon glyphicon-pencil'></i> Edit Project
+        </Link>
         <h2>{this.state.project.attributes.group} / <b>{this.state.project.attributes.name}</b></h2>
+        <a href={this.state.project.attributes.url} target='_blank'>
+          {this.state.project.attributes.url}
+        </a>
       </div>);
   }
 }
