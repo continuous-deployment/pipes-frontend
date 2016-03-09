@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { Component } from 'react';
 
-let Dashboard = React.createClass({
+class Dashboard extends Component
+{
   render () {
     return <h1>This is the dashboard!</h1>;
   }
-});
+}
 
 export default Dashboard;

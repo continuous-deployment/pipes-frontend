@@ -1,33 +1,22 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Link, IndexRoute } from 'react-router';
+import { Router, Route, IndexRoute } from 'react-router';
 
+import App from './components/App.js';
 import Dashboard from './views/Dashboard.js';
 import Projects from './views/Projects.js';
 import Project from './views/Project.js';
-
-const App = React.createClass({
-  render () {
-    return (
-      <div>
-        <ul>
-          <li><Link to='/'>Dashboard</Link></li>
-          <li><Link to='/projects'>Projects</Link></li>
-          <li><Link to='/projects/project/1'>View project</Link></li>
-        </ul>
-        {this.props.children}
-      </div>
-    );
-  }
-});
+import ProjectUpdate from './views/ProjectUpdate.js';
+import ProjectStore from './views/ProjectStore.js';
 
 render((
   <Router>
     <Route path='/' component={App}>
       <IndexRoute component={Dashboard} />
-      <Route path='projects' component={Projects}>
-        <Route path='project/:id' component={Project} />
-      </Route>
+      <Route path='projects' component={Projects}/>
+      <Route path='projects/store' component={ProjectStore} />
+      <Route path='projects/:id' component={Project} />
+      <Route path='projects/:id/update' component={ProjectUpdate} />
     </Route>
   </Router>
 ), document.getElementById('root'));

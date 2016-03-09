@@ -18,7 +18,8 @@ var config = {
         exclude: [node_modules_dir],
         loader: 'babel',
         query: {
-          presets: ['react']
+          presets: ['react'],
+          plugins: ['transform-class-properties']
         }
       },
       {
