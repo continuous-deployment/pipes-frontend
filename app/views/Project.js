@@ -1,6 +1,8 @@
 import React, { Component, PropTypes } from 'react';
 import { Link } from 'react-router';
 
+import PipelineListing from '../components/pipeline/PipelineListing.js';
+
 class Project extends Component
 {
   static propTypes = {
@@ -43,6 +45,8 @@ class Project extends Component
         <a href={this.state.project.attributes.url} target='_blank'>
           {this.state.project.attributes.url}
         </a>
+        <h3>Pipelines</h3>
+        <PipelineListing pipelines={this.state.project.attributes.conditions} />
       </div>);
   }
 }
