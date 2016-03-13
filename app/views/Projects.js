@@ -43,7 +43,7 @@ class Projects extends Component
           <i className='glyphicon glyphicon-plus'></i> New Project
         </Link>
         <h2>Projects</h2>
-        <div class="list-group">
+        <div className="list-group">
           {projects}
         </div>
       </div>
