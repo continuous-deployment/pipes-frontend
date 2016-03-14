@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { Link } from 'react-router';
 
 import PipelineRow from '../components/pipeline/PipelineRow.js';
+import PipeUtils from '../utils/PipeUtils.js';
+import PipelineStore from '../stores/PipelineStore.js';
 
 class Pipeline extends Component
 {
@@ -11,14 +13,16 @@ class Pipeline extends Component
   }
 
   componentDidMount() {
-    $.ajax({
-      url: 'http://192.168.1.114:8000/api/v1/pipeline/' + this.props.params.id,
-      type: 'GET',
-      dataType: 'JSON',
-      success: function (data) {
+    var newPipelineData = function () {
+      PipelineStore.getPipeline(this.props.params.id, function (data) {
         this.setState({ pipeline: data });
-      }.bind(this)
-    });
+      }.bind(this));
+    }.bind(this);
+    newPipelineData();
+
+    PipelineStore.addListener(function () {
+      newPipelineData();
+    }.bind(this));
   }
 
   buildRows (pipes, rows = [], row = 0, previousSize = 12) {
@@ -35,7 +39,7 @@ class Pipeline extends Component
         continue;
       }
       var pipe = pipes[pipeKey];
-      var nextPipes = this.getNextPipesFromPipe(pipe.pipe);
+      var nextPipes = PipeUtils.getNextPipesFromPipe(pipe.pipe);
 
       if (nextPipes.length === 0) {
         continue;
@@ -56,31 +60,6 @@ class Pipeline extends Component
         size: size
       };
     });
-  }
-
-  getNextPipesFromPipe(pipe) {
-    var pipes = [];
-    if (pipe.type === 'condition') {
-      if (pipe.success !== undefined) {
-        pipes.push(pipe.success);
-      }
-
-      if (pipe.failure !== undefined) {
-        pipes.push(pipe.failure);
-      }
-    }
-
-    if (pipe.type === 'splitter') {
-      pipes = pipe.splits;
-    }
-
-    if (pipe.type === 'action') {
-      if (pipe.next !== undefined) {
-        pipes.push(pipe.next);
-      }
-    }
-
-    return pipes;
   }
 
   handleSaveClick () {
@@ -107,19 +86,12 @@ class Pipeline extends Component
     var primaryButton = '';
 
     if (this.state.edit) {
-      primaryButton = [<button
-          className='btn btn-lg btn-success pull-right'
-          onClick={this.handleSaveClick.bind(this)}
-        >
-          <i className='glyphicon glyphicon-save'></i> Save
-        </button>,
-        <button
-          className='btn btn-danger btn-lg'
+      primaryButton = <button
+          className='btn btn-danger btn-lg pull-right'
           onClick={this.handleCancelClick.bind(this)}
         >
           <i className='glyphicon glyphicon-remove'></i> Cancel
-        </button>
-      ];
+        </button>;
     } else {
       primaryButton = <button
         className='btn btn-lg btn-success pull-right'
