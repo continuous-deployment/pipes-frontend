@@ -33,7 +33,7 @@
     "style-loader": "^0.13.0"
   },
   "dependencies": {
-    "flux-react": "^2.6.7",
+    "flux": "^2.1.1",
     "react": "^0.14.6",
     "webpack": "^1.12.12",
     "webpack-dev-server": "^1.14.1"
