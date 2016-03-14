@@ -5,11 +5,15 @@ import PipelineRow from '../components/pipeline/PipelineRow.js';
 import PipeUtils from '../utils/PipeUtils.js';
 import PipelineStore from '../stores/PipelineStore.js';
 
+import NewPipeModal from '../components/pipeline/NewPipeModal.js';
+import NewPipeModalStore from '../stores/NewPipeModalStore.js';
+
 class Pipeline extends Component
 {
   state = {
     pipeline: null,
-    edit: false
+    edit: false,
+    newPipeModal: {}
   }
 
   componentDidMount() {
@@ -23,6 +27,21 @@ class Pipeline extends Component
     PipelineStore.addListener(function () {
       newPipelineData();
     }.bind(this));
+
+
+    var newModalData = function () {
+      var data = NewPipeModalStore.getSettings();
+
+      this.setState({
+        newPipeModal: data
+      });
+    }.bind(this);
+
+    NewPipeModalStore.addListener(function () {
+      newModalData();
+    }.bind(this));
+
+    newModalData();
   }
 
   buildRows (pipes, rows = [], row = 0, previousSize = 12) {
@@ -118,9 +137,16 @@ class Pipeline extends Component
 
     return <div>
       {primaryButton}
+      <div className='sidebar'>
+        <h1>Sidebar</h1>
+      </div>
       <ul className="list-group pipeline">
         {pipeline}
       </ul>
+      <NewPipeModal
+        pipeId={this.state.newPipeModal.pipeId}
+        relationship={this.state.newPipeModal.relationship}
+        show={this.state.newPipeModal.show} />
     </div>;
   }
 }
