@@ -21,7 +21,7 @@ class PipelineRow extends Component
         return '';
       }
 
-      return <div className={'col-sm-' + pipe.size} key={pipe.pipe.id + '_container'}>
+      return <div className={'col-sm-' + pipe.size}>
         <PipeType
           pipe={pipe.pipe}
           {...this.props}
