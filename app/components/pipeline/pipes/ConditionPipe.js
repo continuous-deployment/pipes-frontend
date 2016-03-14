@@ -2,6 +2,8 @@ import React, { Component, PropTypes } from 'react';
 
 import Pipe from './Pipe.js';
 import PipeAttributes from './PipeAttributes.js';
+import ConditionForm from '../pipe-forms/ConditionForm.js';
+import NewPipeModal from '../NewPipeModal.js';
 
 class ConditionPipe extends Component
 {
@@ -22,54 +24,25 @@ class ConditionPipe extends Component
   renderPanel () {
     if (this.props.edit) {
       return <div>
-        <div className='col-sm-6' js-data-form={this.props.pipe.id}>
-          <div className='form-group'>
-            <label htmlFor='type'>Type</label>
-            <select
-              className='form-control'
-              id='type'
-              defaultValue={this.props.pipe.attributes.type}
-            >
-              <option>if</option>
-            </select>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='field'>Field</label>
-            <input
-              type='text'
-              className='form-control'
-              id='field'
-              defaultValue={this.props.pipe.attributes.field} />
-          </div>
-          <div className='form-group'>
-            <label htmlFor='operator'>Operator</label>
-            <select
-              className='form-control'
-              id='operator'
-              defaultValue={this.props.pipe.attributes.operator}
-            >
-              <option>==</option>
-              <option>!=</option>
-              <option>&lt;=</option>
-              <option>&gt;=</option>
-            </select>
-          </div>
-          <div className='form-group'>
-            <label htmlFor='value'>Value</label>
-            <input
-              type='text'
-              className='form-control'
-              id='value'
-              defaultValue={this.props.pipe.attributes.value} />
-          </div>
+        <div className='col-md-6' js-data-form={this.props.pipe.id}>
+          <ConditionForm
+            type={this.props.pipe.attributes.type}
+            field={this.props.pipe.attributes.field}
+            operator={this.props.pipe.attributes.operator}
+            value={this.props.pipe.attributes.value}
+            />
         </div>
         <div className='col-sm-6'>
           {this.renderRelationshipButtons()}
         </div>
+        <NewPipeModal
+          pipeId={this.props.pipe.id}
+          relationship='failure'
+          modalId={'addFailureModal' + this.props.pipe.id} />
       </div>;
     }
 
-    return <div className='col-sm-6'>
+    return <div className='col-md-6'>
       <PipeAttributes
         attributes={this.props.pipe.attributes} />
     </div>;
@@ -92,6 +65,8 @@ class ConditionPipe extends Component
       failureButton = <button
         js-data-action='ADD_FAILURE'
         className='btn btn-danger'
+        data-toggle="modal"
+        data-target={'#addFailureModal' + this.props.pipe.id}
       >
         Add failure
       </button>;
