@@ -1,9 +1,11 @@
 import React, { Component, PropTypes } from 'react';
 
+import Dispatcher from '../../../dispatcher/AppDispatcher.js';
+
 import Pipe from './Pipe.js';
 import PipeAttributes from './PipeAttributes.js';
 import ConditionForm from '../pipe-forms/ConditionForm.js';
-import NewPipeModal from '../NewPipeModal.js';
+
 
 class ConditionPipe extends Component
 {
@@ -35,10 +37,6 @@ class ConditionPipe extends Component
         <div className='col-sm-6'>
           {this.renderRelationshipButtons()}
         </div>
-        <NewPipeModal
-          pipeId={this.props.pipe.id}
-          relationship='failure'
-          modalId={'addFailureModal' + this.props.pipe.id} />
       </div>;
     }
 
@@ -54,8 +52,8 @@ class ConditionPipe extends Component
 
     if (this.props.pipe.success === undefined) {
       successButton = <button
-        js-data-action='ADD_SUCCESS'
         className='btn btn-success'
+        onClick={this.handleSuccessClick.bind(this)}
       >
         Add success
       </button>;
@@ -63,10 +61,8 @@ class ConditionPipe extends Component
 
     if (this.props.pipe.failure === undefined) {
       failureButton = <button
-        js-data-action='ADD_FAILURE'
         className='btn btn-danger'
-        data-toggle="modal"
-        data-target={'#addFailureModal' + this.props.pipe.id}
+        onClick={this.handleFailureClick.bind(this)}
       >
         Add failure
       </button>;
@@ -76,6 +72,28 @@ class ConditionPipe extends Component
       {successButton}
       {failureButton}
     </div>
+  }
+
+  handleFailureClick () {
+    Dispatcher.handleViewAction(
+      'SHOW_MODAL',
+      {
+        pipeId: this.props.pipe.id,
+        relationship: 'failure',
+        show: true
+      }
+    );
+  }
+
+  handleSuccessClick () {
+    Dispatcher.handleViewAction(
+      'SHOW_MODAL',
+      {
+        pipeId: this.props.pipe.id,
+        relationship: 'success',
+        show: true
+      }
+    );
   }
 }
 
